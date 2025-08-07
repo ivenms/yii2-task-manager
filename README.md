@@ -59,7 +59,7 @@ task-manager/
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/ivenms/yii2-task-manager
 cd task-manager
 ```
 
@@ -91,8 +91,8 @@ MYSQL_PORT=3306
 REDIS_PORT=6379
 ```
 
-### 3. Create Database
-Create a MySQL database named `task_manager` (or your preferred name matching the config).
+### 3. Database Setup
+The database will be automatically created when you start the local environment. You can customize the database name by updating the `DB_NAME` variable in your `.env` file.
 
 ### 4. Run Migrations
 ```bash
