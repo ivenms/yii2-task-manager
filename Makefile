@@ -2,14 +2,21 @@
 include .env
 export
 
-.PHONY: build local stop terminal migrate clear test
+.PHONY: build local env-check stop terminal migrate clear test
 
 ## Build application image
 build:
 	docker build -f container/Dockerfile -t $(PROJECT_NAME) .
 
 ## Setup local environment
-local: stop build network mariadb-start redis-start app-start
+local: env-check stop build network mariadb-start redis-start app-start
+
+## Check and create .env file if needed
+env-check:
+	@if [ ! -f .env ]; then \
+		echo "Creating .env from .env.example..."; \
+		cp .env.example .env; \
+	fi
 
 ## Create Docker network
 network:
