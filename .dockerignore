@@ -1,0 +1,14 @@
+.git
+.gitignore
+README.md
+Makefile
+.env.example
+node_modules
+tests
+runtime/logs/*
+runtime/cache/*
+web/assets/*
+vendor
+!vendor/.gitkeep
+.DS_Store
+Thumbs.db

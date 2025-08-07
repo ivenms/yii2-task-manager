@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         cacheResultFile="runtime/.phpunit.result.cache"
+         colors="true"
+         verbose="true">
+    
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>tests/unit</directory>
+        </testsuite>
+        <testsuite name="Feature Tests">
+            <directory>tests/feature</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">controllers</directory>
+            <directory suffix=".php">models</directory>
+            <directory suffix=".php">commands</directory>
+        </include>
+        <exclude>
+            <directory>vendor</directory>
+            <directory>tests</directory>
+            <directory>runtime</directory>
+            <directory>web/assets</directory>
+        </exclude>
+    </coverage>
+
+    <php>
+        <env name="YII_DEBUG" value="true"/>
+        <env name="YII_ENV" value="test"/>
+    </php>
+
+    <logging>
+        <junit outputFile="runtime/junit.xml"/>
+        <testdoxHtml outputFile="runtime/testdox.html"/>
+    </logging>
+</phpunit>

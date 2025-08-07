@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Trash</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Task Manager - Trash</h1>
+            <div>
+                <a href="index.html" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Tasks
+                </a>
+            </div>
+        </div>
+
+        <!-- Trash List -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Deleted Tasks</h5>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="loadTrashTasks(currentPage)">
+                    <i class="fas fa-sync-alt me-2"></i>Refresh
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="trashContainer">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading deleted tasks...</p>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <nav id="paginationNav" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div id="paginationInfo" class="text-muted small"></div>
+                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/trash.js"></script>
+</body>
+</html>
