@@ -5,19 +5,19 @@ A RESTful API-based task manager built with Yii2 framework, featuring comprehens
 ## Features
 
 ### Core Features
-- ✅ Full CRUD operations for tasks
-- ✅ RESTful JSON API endpoints
-- ✅ Task filtering by status, priority, due date, and title search
-- ✅ Pagination and sorting capabilities
-- ✅ Data validation using Yii2 model rules
-- ✅ Proper HTTP status codes (200, 201, 400, 404, 422)
-- ✅ Simple HTML + Bootstrap + JavaScript frontend
+- Full CRUD operations for tasks
+- RESTful JSON API endpoints
+- Task filtering by status, priority, due date, and title search
+- Pagination and sorting capabilities
+- Data validation using Yii2 model rules
+- Proper HTTP status codes (200, 201, 400, 404, 422)
+- Simple HTML + Bootstrap + JavaScript frontend
 
 ### Bonus Features Implemented
-- ✅ **Soft Delete Support** - Tasks are soft-deleted with restore capability
-- ✅ **Tag System** - Many-to-many relationship between tasks and tags
-- ✅ **Status Toggle Endpoint** - Cycle through task statuses
-- ✅ **Advanced Filtering** - Filter by tags and date ranges
+- **Soft Delete Support** - Tasks are soft-deleted with restore capability
+- **Tag System** - Many-to-many relationship between tasks and tags
+- **Status Toggle Endpoint** - Cycle through task statuses
+- **Advanced Filtering** - Filter by tags and date ranges
 
 ## Project Structure
 
@@ -54,13 +54,6 @@ task-manager/
 ├── .env.example                   # Sample environment configuration
 └── README.md
 ```
-
-## Requirements
-
-- PHP 7.4 or higher
-- MySQL/MariaDB
-- Yii2 Framework
-- Composer
 
 ## Installation & Setup
 
@@ -466,4 +459,4 @@ Run with coverage:
 
 ## Author
 
-Task Manager CRUD Assignment - Yii2 Implementation
+[@ivenms](https://github.com/ivenms)
