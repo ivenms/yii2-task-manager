@@ -14,18 +14,32 @@ return [
     ],
     'language' => 'en-US',
     'components' => [
-        'db' => $db,
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+        
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
             'useFileTransport' => true,
             'messageClass' => 'yii\symfonymailer\Message'
         ],
-        'assetManager' => [
-            'basePath' => __DIR__ . '/../web/assets',
-        ],
+        'db' => $db,
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'GET tasks' => 'task/index',
+                'GET tasks/<id:\d+>' => 'task/view',
+                'POST tasks' => 'task/create',
+                'PUT tasks/<id:\d+>' => 'task/update',
+                'DELETE tasks/<id:\d+>' => 'task/delete',
+                'PATCH tasks/<id:\d+>/toggle-status' => 'task/toggle-status',
+                'PATCH tasks/<id:\d+>/restore' => 'task/restore',
+                'GET tasks/trash' => 'task/trash',
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',

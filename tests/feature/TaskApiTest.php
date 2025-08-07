@@ -21,11 +21,12 @@ class TaskApiTest extends TestCase
         $this->cleanDatabase();
         
         // Set up HTTP client for API testing
-        $this->baseUrl = 'http://localhost:8080';
+        // When running in container, use the test entry point directly
+        $this->baseUrl = 'http://127.0.0.1:80/index-test.php';
         $this->client = new Client([
             'base_uri' => $this->baseUrl,
             'timeout' => 30,
-            'http_errors' => false, // Don't throw exceptions on 4xx/5xx responses
+            'http_errors' => false,
         ]);
     }
 
@@ -34,7 +35,7 @@ class TaskApiTest extends TestCase
         $response = $this->client->get('/tasks');
         
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('application/json', $response->getHeaderLine('Content-Type'));
+        $this->assertStringContainsString('application/json', $response->getHeaderLine('Content-Type'));
         
         $data = json_decode($response->getBody()->getContents(), true);
         $this->assertEquals('success', $data['status']);
