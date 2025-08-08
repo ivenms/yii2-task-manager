@@ -19,15 +19,9 @@ class TaskApiTest extends TestCase
         parent::setUp();
         $this->mockApplication();
         
-        // Double cleanup to ensure absolutely clean state
-        $this->cleanDatabase();
-        $this->flushDatabase();
-        $this->cleanDatabase(); // Clean again to be absolutely sure
-        $this->flushDatabase();
-        
         // Set up HTTP client for API testing
         // When running in container, use the test entry point directly
-        $this->baseUrl = 'http://127.0.0.1:80/index-test.php';
+        $this->baseUrl = 'http://127.0.0.1/index-test.php';
         $this->client = new Client([
             'base_uri' => $this->baseUrl,
             'timeout' => 30,
@@ -128,10 +122,6 @@ class TaskApiTest extends TestCase
             'due_date' => '2024-11-30'
         ]);
         $task2->save();
-        
-        // Ensure tasks are visible to HTTP requests
-        $this->flushDatabase();
-        $this->waitForDatabaseConsistency();
 
         $response = $this->client->get('/tasks');
         
@@ -159,8 +149,6 @@ class TaskApiTest extends TestCase
         ]);
         $task2->save();
         
-        // Ensure tasks are visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         // Test status filter
@@ -192,9 +180,6 @@ class TaskApiTest extends TestCase
             'due_date' => '2024-12-31'
         ]);
         $task->save();
-        
-        // Ensure task is visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         $response = $this->client->get("/tasks/{$task->id}");
@@ -223,9 +208,6 @@ class TaskApiTest extends TestCase
             'priority' => 'low'
         ]);
         $task->save();
-        
-        // Ensure task is visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         $updateData = [
@@ -255,9 +237,6 @@ class TaskApiTest extends TestCase
             'status' => 'pending'
         ]);
         $task->save();
-        
-        // Ensure task is visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         $response = $this->client->delete("/tasks/{$task->id}");
@@ -276,9 +255,6 @@ class TaskApiTest extends TestCase
             'status' => 'pending'
         ]);
         $task->save();
-        
-        // Ensure task is visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         // Toggle from pending to in_progress
@@ -316,9 +292,6 @@ class TaskApiTest extends TestCase
         ]);
         $deletedTask->save();
         $deletedTask->softDelete();
-        
-        // Ensure tasks are visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         $response = $this->client->get('/tasks/trash');
@@ -338,9 +311,6 @@ class TaskApiTest extends TestCase
             'status' => 'pending'
         ]);
         $task->save();
-        
-        // Ensure task is visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
         $task->softDelete();
 
@@ -363,9 +333,6 @@ class TaskApiTest extends TestCase
             ]);
             $task->save();
         }
-        
-        // Ensure all tasks are visible to HTTP requests
-        $this->flushDatabase();
         $this->waitForDatabaseConsistency();
 
         // Test first page
