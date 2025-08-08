@@ -15,9 +15,16 @@ return [
     'language' => 'en-US',
     'components' => [
         'request' => [
+            'cookieValidationKey' => 'test',
+            'enableCsrfValidation' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
+            /*
+            'csrfCookie' => [
+                'domain' => 'localhost',
+            ],
+            */
         ],
         
         'mailer' => [
@@ -43,15 +50,6 @@ return [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-        ],
-        'request' => [
-            'cookieValidationKey' => 'test',
-            'enableCsrfValidation' => false,
-            /*
-            'csrfCookie' => [
-                'domain' => 'localhost',
-            ],
-            */
         ],
     ],
     'params' => $params,

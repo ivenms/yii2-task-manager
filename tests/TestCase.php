@@ -13,7 +13,6 @@ abstract class TestCase extends BaseTestCase
 {
     /**
      * Clean up after test.
-     * By default the application created in setUp() will be destroyed.
      */
     protected function tearDown(): void
     {
@@ -22,7 +21,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * Destroys application in Yii::$app by setting it to null.
+     * Destroys application instance.
      */
     protected function destroyApplication()
     {
@@ -74,9 +73,43 @@ abstract class TestCase extends BaseTestCase
     protected function cleanDatabase()
     {
         $db = Yii::$app->db;
-        $db->createCommand('DELETE FROM {{%task_tag}}')->execute();
-        $db->createCommand('DELETE FROM {{%tags}}')->execute();
-        $db->createCommand('DELETE FROM {{%tasks}}')->execute();
+        
+        $db->createCommand('SET FOREIGN_KEY_CHECKS = 0')->execute();
+        
+        $db->createCommand('TRUNCATE TABLE {{%task_tag}}')->execute();
+        $db->createCommand('TRUNCATE TABLE {{%tags}}')->execute();
+        $db->createCommand('TRUNCATE TABLE {{%tasks}}')->execute();
+        
+        $db->createCommand('SET FOREIGN_KEY_CHECKS = 1')->execute();
+        
+        $db->createCommand('COMMIT')->execute();
+    }
+    
+    /**
+     * Ensure database changes are immediately visible to other connections
+     */
+    protected function flushDatabase()
+    {
+        $db = Yii::$app->db;
+        // Force commit any pending transactions
+        $db->createCommand('COMMIT')->execute();
+    }
+    
+    /**
+     * Wait for database consistency (useful for async operations)
+     */
+    protected function waitForDatabaseConsistency($maxWaitMs = 1000)
+    {
+        $start = microtime(true);
+        $maxWait = $maxWaitMs / 1000;
+        
+        while ((microtime(true) - $start) < $maxWait) {
+            usleep(10000); // 10ms
+            
+            // Force flush any pending operations
+            $this->flushDatabase();
+            break;
+        }
     }
 
     /**
