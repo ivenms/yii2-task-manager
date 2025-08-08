@@ -105,7 +105,23 @@ This will:
 
 The database will be automatically created when you start the local environment. You can customize the database name by updating the `DB_NAME` variable in your `.env` file.
 
-### 4. Access the Application
+### 4. Manual Migration (if needed)
+If you encounter any SQL errors during the automatic migration step, you can run migrations manually:
+
+```bash
+# Run main database migrations
+make migrate
+
+# Run test database migrations
+make migrate-test
+```
+
+This will create the following tables:
+- `tasks` - Main tasks table with soft delete support
+- `tags` - Tags for categorizing tasks
+- `task_tag` - Junction table for many-to-many relationship
+
+### 5. Access the Application
 - **Frontend Interface**: `http://localhost:8080/index.html`
 - **API Base URL**: `http://localhost:8080/tasks`
 
