@@ -90,25 +90,22 @@ MYSQL_PORT=3306
 REDIS_PORT=6379
 ```
 
-### 3. Database Setup
-The database will be automatically created when you start the local environment. You can customize the database name by updating the `DB_NAME` variable in your `.env` file.
-
-### 4. Run Migrations
-```bash
-make migrate
-```
-
-This will create the following tables:
-- `tasks` - Main tasks table with soft delete support
-- `tags` - Tags for categorizing tasks
-- `task_tag` - Junction table for many-to-many relationship
-
-### 5. Start the Application
+### 3. Start the Application
 ```bash
 make local
 ```
 
-### 6. Access the Application
+This will:
+- Check and create `.env` file if needed
+- Build the application Docker image
+- Start MariaDB and Redis containers
+- Start the application container
+- Automatically run database migrations
+- Set up the test database
+
+The database will be automatically created when you start the local environment. You can customize the database name by updating the `DB_NAME` variable in your `.env` file.
+
+### 4. Access the Application
 - **Frontend Interface**: `http://localhost:8080/index.html`
 - **API Base URL**: `http://localhost:8080/tasks`
 
