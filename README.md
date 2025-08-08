@@ -59,7 +59,7 @@ task-manager/
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/ivenms/yii2-task-manager
-cd task-manager
+cd yii2-task-manager
 ```
 
 ### 2. Environment Configuration
