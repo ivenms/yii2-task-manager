@@ -39,7 +39,6 @@ task-manager/
 ├── web/
 │   ├── index.html                 # Frontend interface
 │   ├── trash.html                 # Trash/deleted tasks interface
-│   ├── css/site.css              # Styling
 │   └── js/                       # JavaScript files
 ├── config/
 │   ├── db.php                     # Database configuration
